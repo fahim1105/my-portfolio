@@ -4,15 +4,21 @@ import { FaLinkedinIn, FaGithub, FaDownload, FaPhoneAlt, FaFacebook } from 'reac
 import { GrInstagram } from 'react-icons/gr';
 import { Link } from 'react-router';
 import { saveAs } from 'file-saver';
+import myCV from '/asif_cv.pdf'
 
 const HeroCard = () => {
     const [isMobile, setIsMobile] = useState(false);
     const [isTablet, setIsTablet] = useState(false);
 
+    // const handleDownload = () => {
+    //     const pdfUrl = "/public/asif_cv.pdf";
+    //     const fileName = "Asif_Al_Fattha_Fahim_CV.pdf";
+    //     saveAs(pdfUrl, fileName);
+    // };
     const handleDownload = () => {
-        const pdfUrl = "/public/Asif_CV.pdf";
+        // window.location.origin ব্যবহারের দরকার নেই, সরাসরি ইম্পোর্ট করা ফাইলটি দিন
         const fileName = "Asif_Al_Fattha_Fahim_CV.pdf";
-        saveAs(pdfUrl, fileName);
+        saveAs(myCV, fileName);
     };
 
     useEffect(() => {
