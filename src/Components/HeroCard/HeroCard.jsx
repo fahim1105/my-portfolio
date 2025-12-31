@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { FaLinkedinIn, FaGithub, FaDownload, FaPhoneAlt, FaFacebook } from 'react-icons/fa';
 import { GrInstagram } from 'react-icons/gr';
 import { Link } from 'react-router';
+import myCV from '../../assets/Asif_CV.pdf'
 
 const HeroCard = () => {
     const [isMobile, setIsMobile] = useState(false);
@@ -89,10 +90,18 @@ const HeroCard = () => {
 
                 {/* --- Bottom Buttons --- */}
                 <div className="mt-auto flex border-t border-secondary-content/50 h-16 md:h-20 lg:h-16">
-                    <button className="flex-1 bg-primary-content text-secondary-content flex items-center justify-center gap-2 text-[10px] md:text-xs lg:text-[10px] font-bold uppercase tracking-[2px] hover:text-green-500 transition-all border-r border-white/5 group">
+                    {/* <button className="flex-1 bg-primary-content text-secondary-content flex items-center justify-center gap-2 text-[10px] md:text-xs lg:text-[10px] font-bold uppercase tracking-[2px] hover:text-green-500 transition-all border-r border-white/5 group">
                         Download CV
                         <FaDownload className="text-xs group-hover:animate-bounce" />
-                    </button>
+                    </button> */}
+                    <a
+                        href={myCV} // আপনার ফাইলের নাম অনুযায়ী এখানে পাথ দিন
+                        download="Asif_Al_Fattha_Fahim_CV.pdf" // ডাউনলোড হওয়ার সময় ফাইলটির নাম যা হবে
+                        className="flex-1 bg-primary-content text-secondary-content flex items-center justify-center gap-2 text-[10px] md:text-xs lg:text-[10px] font-bold uppercase tracking-[2px] hover:text-green-500 transition-all border-r border-white/5 group"
+                    >
+                        Download CV
+                        <FaDownload className="text-xs group-hover:animate-bounce" />
+                    </a>
                     <Link to="/contact" className="flex-1 bg-primary-content text-secondary-content flex items-center justify-center gap-2 text-[10px] md:text-xs lg:text-[10px] font-bold uppercase tracking-[2px] hover:text-green-500 transition-all">
                         Contact Me
                         <FaPhoneAlt className="text-xs" />
