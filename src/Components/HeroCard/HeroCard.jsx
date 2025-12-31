@@ -10,11 +10,7 @@ const HeroCard = () => {
     const [isMobile, setIsMobile] = useState(false);
     const [isTablet, setIsTablet] = useState(false);
 
-    // const handleDownload = () => {
-    //     const pdfUrl = "/public/asif_cv.pdf";
-    //     const fileName = "Asif_Al_Fattha_Fahim_CV.pdf";
-    //     saveAs(pdfUrl, fileName);
-    // };
+
     const handleDownload = () => {
         // window.location.origin ব্যবহারের দরকার নেই, সরাসরি ইম্পোর্ট করা ফাইলটি দিন
         const fileName = "Asif_Al_Fattha_Fahim_CV.pdf";
