@@ -4,29 +4,28 @@ import { FaLinkedinIn, FaGithub, FaDownload, FaPhoneAlt, FaFacebook } from 'reac
 import { GrInstagram } from 'react-icons/gr';
 import { Link } from 'react-router';
 import { saveAs } from 'file-saver';
-import myCV from '/asif_cv.pdf'
+import { Typewriter } from 'react-simple-typewriter';
+import myCV from '/asif_cv.pdf';
 
 const HeroCard = () => {
     const [isMobile, setIsMobile] = useState(false);
     const [isTablet, setIsTablet] = useState(false);
 
-
-    const handleDownload = () => {
-        // window.location.origin ব্যবহারের দরকার নেই, সরাসরি ইম্পোর্ট করা ফাইলটি দিন
-        const fileName = "Asif_Al_Fattha_Fahim_CV.pdf";
-        saveAs(myCV, fileName);
-    };
-
     useEffect(() => {
         const checkScreenSize = () => {
             const width = window.innerWidth;
-            setIsMobile(width < 768); // মোবাইল: ৭৬৮ এর নিচে
-            setIsTablet(width >= 768 && width < 1024); // ট্যাবলেট: ৭৬৮ থেকে ১০২৪ এর মধ্যে
+            setIsMobile(width < 768);
+            setIsTablet(width >= 768 && width < 1024);
         };
         checkScreenSize();
         window.addEventListener('resize', checkScreenSize);
         return () => window.removeEventListener('resize', checkScreenSize);
     }, []);
+
+    const handleDownload = () => {
+        const fileName = "Asif_Al_Fattha_Fahim_CV.pdf";
+        saveAs(myCV, fileName);
+    };
 
     return (
         <div className="h-full w-full lg:[perspective:2000px]">
@@ -35,7 +34,6 @@ const HeroCard = () => {
                 animate={{
                     opacity: 1,
                     y: 0,
-                    // মোবাইল ও ট্যাবলেটে সোজা (0), শুধু ডেস্কটপে বাঁকানো (15)
                     rotateY: (isMobile || isTablet) ? 0 : 15,
                 }}
                 whileHover={{ rotateY: 0 }}
@@ -44,55 +42,45 @@ const HeroCard = () => {
             >
 
                 {/* --- Top Image Section --- */}
-                <div className={`relative w-full overflow-hidden transition-all duration-500 ${isMobile ? 'h-[320px]' : isTablet ? 'h-[450px]' : 'h-[380px]'
+                <div className={`relative w-full overflow-hidden transition-all duration-500 ${isMobile ? 'h-[420px]' : isTablet ? 'h-[550px]' : 'h-[500px]'
                     }`}>
                     <img
                         src="https://i.ibb.co.com/99WGTgKm/241d449b744ebd4910d1ecfdbde1a1be.jpg"
                         alt="Asif Al Fattha Fahim"
                         className="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700"
                     />
-                    <div className="absolute bottom-0 left-0 w-full h-1/4 bg-gradient-to-t from-primary-content to-transparent"></div>
+                    <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-primary-content to-transparent"></div>
                 </div>
 
                 {/* --- Content Area --- */}
-                <div className="relative -mt-12 pt-20 bg-primary-content text-center px-6 z-10 flex-grow">
+                <div className="relative -mt-16 pt-20 bg-primary-content text-center px-6 z-10 flex-grow">
                     <h1 className="text-2xl md:text-3xl lg:text-3xl font-bold tracking-tight text-secondary-content mb-2">
                         Asif Al Fattha Fahim
                     </h1>
 
-                    <div className="flex justify-center items-center gap-1 mb-6 lg:mb-8">
-                        <p className="text-primary font-mono text-xs md:text-sm lg:text-sm tracking-[3px] uppercase">
-                            Junior Web Developer
-                        </p>
-                        <motion.span
-                            animate={{ opacity: [1, 0] }}
-                            transition={{ repeat: Infinity, duration: 0.8 }}
-                            className="w-[2px] h-4 bg-green-500"
-                        ></motion.span>
+                    {/* --- Video Style Typewriter Animation --- */}
+                    <div className="flex justify-center items-center mb-6 lg:mb-8 h-6 text-primary font-mono text-xs md:text-sm lg:text-sm tracking-[3px] uppercase font-bold">
+                        <Typewriter
+                            words={[
+                                'Junior Web Developer',
+                                'Frontend Developer',
+                                'MERN Stack Developer'
+                            ]}
+                            loop={0} // আনলিমিটেড লুপ
+                            cursor
+                            cursorStyle='_' // ভিডিওর মতো কার্সর স্টাইল চাইলে '_' বা '|' দিতে পারেন
+                            typeSpeed={80} // টাইপ হওয়ার গতি
+                            deleteSpeed={50} // মোছার গতি
+                            delaySpeed={1500} // এক টেক্সট থেকে আরেক টেক্সটের বিরতি
+                        />
                     </div>
 
                     {/* Social Icons */}
                     <div className="flex justify-center gap-5 text-secondary-content text-lg md:text-xl mb-8 lg:mb-10">
-                        <a
-                            href="https://www.linkedin.com/in/aaff115/"
-                            className="hover:text-green-500 transition-colors duration-300">
-                            <FaLinkedinIn />
-                        </a>
-                        <a
-                            href="https://github.com/fahim1105"
-                            className="hover:text-green-500 transition-colors duration-300">
-                            <FaGithub />
-                        </a>
-                        <a
-                            href="https://www.instagram.com/aaff.115"
-                            className="hover:text-green-500 transition-colors duration-300">
-                            <GrInstagram />
-                        </a>
-                        <a
-                            href="https://www.facebook.com/aaff.115"
-                            className="hover:text-green-500 transition-colors duration-300">
-                            <FaFacebook />
-                        </a>
+                        <a href="https://www.linkedin.com/in/aaff115/" target="_blank" rel="noreferrer" className="hover:text-green-500 transition-colors duration-300"><FaLinkedinIn /></a>
+                        <a href="https://github.com/fahim1105" target="_blank" rel="noreferrer" className="hover:text-green-500 transition-colors duration-300"><FaGithub /></a>
+                        <a href="https://www.instagram.com/aaff.115" target="_blank" rel="noreferrer" className="hover:text-green-500 transition-colors duration-300"><GrInstagram /></a>
+                        <a href="https://www.facebook.com/aaff.115" target="_blank" rel="noreferrer" className="hover:text-green-500 transition-colors duration-300"><FaFacebook /></a>
                     </div>
                 </div>
 
@@ -110,11 +98,10 @@ const HeroCard = () => {
                     </Link>
                 </div>
 
-                {/* ডেস্কটপ শ্যাডো স্ট্রিপ */}
                 {!isMobile && !isTablet && <div className="absolute top-0 left-0 w-[1px] h-full bg-white/5"></div>}
             </motion.div>
         </div>
     );
 };
 
-export default HeroCard; 
+export default HeroCard;

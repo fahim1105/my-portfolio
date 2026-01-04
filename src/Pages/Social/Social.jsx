@@ -40,7 +40,7 @@ const Social = () => {
             {/* --- Header --- */}
             <div className="mb-10">
                 <h2 className="text-4xl font-extrabold tracking-tight">
-                    <span className="text-primary italic mr-1">C</span>onnect
+                    <span className="text-primary italic mr-1">S</span>ocial Media
                 </h2>
                 <div className="w-16 h-1.5 bg-primary mt-2 rounded-full shadow-[0_0_10px_#10b981]"></div>
             </div>

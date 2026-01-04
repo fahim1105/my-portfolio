@@ -76,7 +76,7 @@ const About = () => {
                             Hey, there <br /> I'm <span className="text-primary font-bold">Asif Al Fattha Fahim</span>.
                         </p>
                         <p className="text-lg text-base-content/80 leading-relaxed text-start">
-                            I am a MERN Stack Developer driven by the challenge of building modern, user-centric web applications. I specialize in crafting seamless user interfaces while ensuring robust server-side logic and database management.
+                            I am a MERN Stack Developer building scalable web applications with React, Node.js, and MongoDB. My foundation in C++, Python, and Java Script drives my problem-solving approach, from architecture to UI polish. Currently mastering Next.js to deliver high-performance full-stack solutions, I am committed to clean code and creating digital tools that make a real impact.
                         </p>
 
                         {/* Quick Info Meta */}

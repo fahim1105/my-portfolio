@@ -3,10 +3,6 @@ import { Link } from 'react-router';
 import { motion } from 'framer-motion';
 import Lottie from 'react-lottie';
 import { HiArrowLeft } from 'react-icons/hi';
-
-// লটি অ্যানিমেশনের জন্য একটি JSON ফাইল ব্যবহার করতে হবে। 
-// আপনি এই URL থেকে একটি 404 লটি ফাইল ডাউনলোড করে নিতে পারেন:
-// https://lottiefiles.com/animations/404-error-page-9SreW7ZndY
 import animationData from '../../assets/404-animation.json'
 
 const ErrorPage = () => {
