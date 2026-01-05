@@ -29,6 +29,73 @@ const HeroCard = () => {
 
     return (
         <div className="h-full w-full lg:[perspective:2000px]">
+            {/* --- Updated Premium Glitch Styles --- */}
+            <style>
+                {`
+                .premium-glitch {
+                    position: relative;
+                    overflow: hidden;
+                    background: black;
+                }
+                
+                .glitch-layer {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: url("https://i.ibb.co.com/99WGTgKm/241d449b744ebd4910d1ecfdbde1a1be.jpg");
+                    background-size: cover;
+                    background-position: center;
+                    z-index: 1;
+                    opacity: 0;
+                }
+
+                /* Main Image */
+                .main-img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transition: filter 0.8s ease;
+                    filter: grayscale(0%);
+                }
+
+                /* Animation duration increased to 3s for a smoother premium feel */
+                .main-img {
+                    animation: main-blink 3s infinite;
+                }
+
+                .glitch-layer:nth-child(1) {
+                    animation: glitch-slice-1 6s infinite;
+                    filter: grayscale(100%) contrast(110%);
+                }
+
+                .glitch-layer:nth-child(2) {
+                    animation: glitch-slice-2 6s infinite;
+                    filter: grayscale(100%) brightness(130%);
+                }
+
+                /* Grayscale effect now lasts longer (from 80% to 95%) */
+                @keyframes main-blink {
+                    0%, 75%, 100% { filter: grayscale(0%); opacity: 1; transform: scale(1); }
+                    80%, 95% { filter: grayscale(100%); opacity: 0.9; transform: scale(1.01); }
+                }
+
+                /* Slices triggered during the grayscale window */
+                @keyframes glitch-slice-1 {
+                    0%, 79%, 96%, 100% { opacity: 0; transform: translateX(0); clip-path: inset(0 0 0 0); }
+                    82% { opacity: 1; transform: translateX(-12px); clip-path: inset(15% 0 65% 0); }
+                    85% { opacity: 1; transform: translateX(8px); clip-path: inset(45% 0 35% 0); }
+                }
+
+                @keyframes glitch-slice-2 {
+                    0%, 81%, 94%, 100% { opacity: 0; transform: translateX(0); clip-path: inset(0 0 0 0); }
+                    84% { opacity: 1; transform: translateX(12px); clip-path: inset(5% 0 85% 0); }
+                    88% { opacity: 1; transform: translateX(-10px); clip-path: inset(70% 0 10% 0); }
+                }
+                `}
+            </style>
+
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{
@@ -42,14 +109,22 @@ const HeroCard = () => {
             >
 
                 {/* --- Top Image Section --- */}
-                <div className={`relative w-full overflow-hidden transition-all duration-500 ${isMobile ? 'h-[420px]' : isTablet ? 'h-[550px]' : 'h-[500px]'
-                    }`}>
+                <div className={`premium-glitch w-full overflow-hidden transition-all duration-500 ${isMobile ? 'h-[420px]' : isTablet ? 'h-[550px]' : 'h-[500px]'}`}>
+                    
+                    {/* Removed Scanline for a cleaner look */}
+
+                    {/* Glitch Layers */}
+                    <div className="glitch-layer"></div>
+                    <div className="glitch-layer"></div>
+                    
+                    {/* Main Image */}
                     <img
                         src="https://i.ibb.co.com/99WGTgKm/241d449b744ebd4910d1ecfdbde1a1be.jpg"
-                        alt="Asif Al Fattha Fahim"
-                        className="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700"
+                        alt="Asif"
+                        className="main-img"
                     />
-                    <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-primary-content to-transparent"></div>
+
+                    <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-primary-content to-transparent z-10"></div>
                 </div>
 
                 {/* --- Content Area --- */}
@@ -58,20 +133,15 @@ const HeroCard = () => {
                         Asif Al Fattha Fahim
                     </h1>
 
-                    {/* --- Video Style Typewriter Animation --- */}
                     <div className="flex justify-center items-center mb-6 lg:mb-8 h-6 text-primary font-mono text-xs md:text-sm lg:text-sm tracking-[3px] uppercase font-bold">
                         <Typewriter
-                            words={[
-                                'Junior Web Developer',
-                                'Frontend Developer',
-                                'MERN Stack Developer'
-                            ]}
-                            loop={0} // আনলিমিটেড লুপ
+                            words={['Junior Web Developer', 'Frontend Developer', 'MERN Stack Developer']}
+                            loop={0}
                             cursor
-                            cursorStyle='_' // ভিডিওর মতো কার্সর স্টাইল চাইলে '_' বা '|' দিতে পারেন
-                            typeSpeed={80} // টাইপ হওয়ার গতি
-                            deleteSpeed={50} // মোছার গতি
-                            delaySpeed={1500} // এক টেক্সট থেকে আরেক টেক্সটের বিরতি
+                            cursorStyle='_'
+                            typeSpeed={80}
+                            deleteSpeed={50}
+                            delaySpeed={1500}
                         />
                     </div>
 

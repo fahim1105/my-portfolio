@@ -39,7 +39,7 @@ const Navbar = () => {
     ];
 
     return (
-        <div className="md:relative z-50 lg:left-35 sticky flex justify-center pl-3 lg:pl-0">
+        <div className="md:relative z-50 lg:left-35 sticky flex justify-center ">
 
             {/* স্থির আউটলাইন বর্ডার */}
             <div className="hidden md:block absolute -left-4 top-2 -bottom-1 w-23 border-l-2 border-b-2 border-primary/40 rounded-[42px] pointer-events-none">
