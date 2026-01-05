@@ -17,7 +17,7 @@ const Education = () => {
             id: 2,
             institution: "Notre Dame College, Mymensingh",
             degree: "Higher Secondary Certificate (HSC)",
-            duration: "Completed: 2013",
+            duration: "Completed: 2023",
             details: "Group: Science. Developed a strong foundation in physics, mathematics, and chemistry.",
             logo: "https://i.ibb.co.com/zd9qhVb/notre-dame-logo.png", // আপনার দেওয়া লিঙ্কের ইমেজ পাথ
             status: "Completed"
