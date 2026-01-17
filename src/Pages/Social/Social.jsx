@@ -1,7 +1,5 @@
-import React from 'react';
 import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedinIn, FaFacebookF, FaTwitter, FaWhatsapp } from 'react-icons/fa';
-import { SiLeetcode } from 'react-icons/si';
+import { FaGithub, FaLinkedinIn, FaFacebookF, FaWhatsapp } from 'react-icons/fa';
 
 const Social = () => {
     const socials = [
@@ -35,35 +33,70 @@ const Social = () => {
         }
     ];
 
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.15,
+            }
+        }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.5,
+                ease: "easeOut"
+            }
+        }
+    };
+
     return (
         <section className="py-10 px-3">
             {/* --- Header --- */}
-            <div className="mb-10">
+            <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+                className="mb-10"
+            >
                 <h2 className="text-4xl font-extrabold tracking-tight">
                     <span className="text-primary italic mr-1">S</span>ocial Media
                 </h2>
                 <div className="w-16 h-1.5 bg-primary mt-2 rounded-full shadow-[0_0_10px_#10b981]"></div>
-            </div>
+            </motion.div>
 
-            {/* --- Social Grid --- 
-                ট্যাবলেট এবং মোবাইলে একই রকম রাখার জন্য: grid-cols-1
-                ডেস্কটপে: lg:grid-cols-2
-            */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-6">
+            {/* --- Social Grid with Stagger Animation --- */}
+            <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+                className="grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-6"
+            >
                 {socials.map((social, index) => (
                     <motion.a
                         key={index}
+                        variants={itemVariants}
                         href={social.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        whileHover={{ y: -5 }}
+                        whileHover={{ y: -5, scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
                         className={`flex items-center justify-between p-5 bg-base-200/50 backdrop-blur-xl border border-base-300 rounded-3xl transition-all duration-300 group ${social.color}`}
                     >
                         <div className="flex items-center gap-5">
                             {/* Icon Box */}
-                            <div className="p-4 bg-base-300 rounded-2xl text-2xl group-hover:text-white group-hover:bg-white/10 transition-all">
+                            <motion.div
+                                whileHover={{ rotate: 360 }}
+                                transition={{ duration: 0.6 }}
+                                className="p-4 bg-base-300 rounded-2xl text-2xl group-hover:text-white group-hover:bg-white/10 transition-all"
+                            >
                                 {social.icon}
-                            </div>
+                            </motion.div>
 
                             {/* Text Info */}
                             <div>
@@ -75,19 +108,28 @@ const Social = () => {
                         </div>
 
                         {/* Arrow Icon */}
-                        <div className="hidden sm:block opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-white text-xl">
+                        <motion.div
+                            initial={{ x: 0 }}
+                            whileHover={{ x: 5 }}
+                            className="hidden sm:block opacity-0 group-hover:opacity-100 transition-all text-white text-xl"
+                        >
                             →
-                        </div>
+                        </motion.div>
                     </motion.a>
                 ))}
-            </div>
+            </motion.div>
 
-            {/* --- Additional Info (Optional) --- */}
-            <div className="mt-12 p-8 bg-primary/5 border border-primary/10 rounded-[2.5rem] text-center">
+            {/* --- Additional Info --- */}
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8, duration: 0.5 }}
+                className="mt-12 p-8 bg-primary/5 border border-primary/10 rounded-[2.5rem] text-center"
+            >
                 <p className="text-base-content/70 font-medium">
                     I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions.
                 </p>
-            </div>
+            </motion.div>
         </section>
     );
 };
