@@ -8,15 +8,6 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Show default cursor - no custom CSS cursor */
-* {
-  cursor: auto;
-}
-
-html, body {
-  cursor: auto;
-}
-
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

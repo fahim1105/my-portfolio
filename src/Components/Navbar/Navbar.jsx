@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router';
 import { motion } from 'framer-motion';
-import { HiMoon, HiSun, HiMenuAlt3, HiX, HiUser, HiBriefcase, HiAcademicCap } from 'react-icons/hi'; // HiAcademicCap যোগ করা হয়েছে
+import { HiMoon, HiSun, HiMenuAlt3, HiX, HiUser, HiBriefcase, HiAcademicCap } from 'react-icons/hi';
 import { MdConnectWithoutContact } from 'react-icons/md';
 import { IoShareSocial } from 'react-icons/io5';
 import { Typewriter } from 'react-simple-typewriter';
@@ -22,7 +22,7 @@ const Navbar = () => {
     const getIcon = (name) => {
         switch (name.toLowerCase()) {
             case 'about': return <HiUser />;
-            case 'education': return <HiAcademicCap />; // Education আইকন সেট করা হয়েছে
+            case 'education': return <HiAcademicCap />;
             case 'projects': return <HiBriefcase />;
             case 'social': return <IoShareSocial />;
             case 'contact': return <MdConnectWithoutContact />;
@@ -32,7 +32,7 @@ const Navbar = () => {
 
     const navLinks = [
         { name: 'About', path: '/' },
-        { name: 'Education', path: '/education' }, // নতুন Education লিঙ্ক যোগ করা হয়েছে
+        { name: 'Education', path: '/education' },
         { name: 'Projects', path: '/projects' },
         { name: 'Social', path: '/social' },
         { name: 'Contact', path: '/contact' },
@@ -89,7 +89,6 @@ const Navbar = () => {
 
                     {/* --- Navigation Links --- */}
                     <div className={`${isMenuOpen ? 'block' : 'hidden'} lg:block`}>
-                        {/* md:gap-6 এবং lg:gap-8 অ্যাডজাস্ট করা হয়েছে যাতে নতুন আইটেমটি সুন্দরভাবে ফিট করে */}
                         <ul className="flex flex-row lg:flex-col items-center justify-around lg:justify-center lg:py-10 py-4 md:py-6 lg:gap-8 md:gap-6">
                             {navLinks.map((link) => (
                                 <li key={link.name}>

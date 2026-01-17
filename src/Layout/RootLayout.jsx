@@ -6,7 +6,6 @@ import ScrollProgress from '../Components/ScrollProgress/ScrollProgress';
 import BackToTop from '../Components/BackToTop/BackToTop';
 import SmoothPageTransition from '../Components/SmoothPageTransition/SmoothPageTransition';
 import ParticleBackground from '../Components/ParticleBackground/ParticleBackground';
-import CustomCursor from '../Components/CustomCursor/CustomCursor';
 
 const RootLayout = () => {
     const location = useLocation();
@@ -58,9 +57,6 @@ const RootLayout = () => {
 
             {/* Back to Top Button */}
             <BackToTop />
-            
-            {/* Custom Cursor that follows real cursor */}
-            <CustomCursor />
         </div>
     );
 };
