@@ -1,23 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router';
 import { motion } from 'framer-motion';
-import { HiMoon, HiSun, HiMenuAlt3, HiX, HiUser, HiBriefcase, HiAcademicCap } from 'react-icons/hi';
+import { HiMenuAlt3, HiX, HiUser, HiBriefcase, HiAcademicCap } from 'react-icons/hi';
 import { MdConnectWithoutContact } from 'react-icons/md';
 import { IoShareSocial } from 'react-icons/io5';
 import { Typewriter } from 'react-simple-typewriter';
+import ThemeToggle from '../ThemeToggle/ThemeToggle';
 
 const Navbar = () => {
-    const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-    useEffect(() => {
-        document.documentElement.setAttribute('data-theme', theme);
-        localStorage.setItem('theme', theme);
-    }, [theme]);
-
-    const toggleTheme = () => {
-        setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
-    };
 
     const getIcon = (name) => {
         switch (name.toLowerCase()) {
@@ -78,9 +69,7 @@ const Navbar = () => {
                             </span>
                         </div>
                         <div className="flex items-center gap-4 md:gap-6">
-                            <button onClick={toggleTheme} className="btn btn-ghost btn-circle btn-sm md:btn-md text-xl md:text-2xl">
-                                {theme === 'light' ? <HiMoon /> : <HiSun className="text-yellow-400" />}
-                            </button>
+                            <ThemeToggle className="scale-75 md:scale-100" />
                             <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="btn btn-ghost btn-circle btn-sm md:btn-md text-2xl md:text-3xl">
                                 {isMenuOpen ? <HiX /> : <HiMenuAlt3 />}
                             </button>
@@ -113,12 +102,7 @@ const Navbar = () => {
 
                         <div className="hidden lg:flex flex-col items-center gap-6 pb-10">
                             <div className="w-10 h-[1px] bg-base-300 opacity-20"></div>
-                            <button
-                                onClick={toggleTheme}
-                                className="btn btn-ghost btn-circle hover:bg-base-200 transition-colors"
-                            >
-                                {theme === 'light' ? <HiMoon className="text-xl" /> : <HiSun className="text-xl text-yellow-400" />}
-                            </button>
+                            <ThemeToggle />
                         </div>
                     </div>
                 </motion.nav>
