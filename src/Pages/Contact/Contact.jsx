@@ -22,6 +22,7 @@ const Contact = () => {
             .then(() => {
                 setLoading(false);
                 e.target.reset();
+                
                 showSuccess(
                     "🎉 Message sent successfully! I'll get back to you soon.",
                     6000
@@ -29,6 +30,7 @@ const Contact = () => {
             }, (error) => {
                 console.log("Failed...", error);
                 setLoading(false);
+                
                 showError(
                     "❌ Failed to send message. Please try again or contact me directly.",
                     7000
