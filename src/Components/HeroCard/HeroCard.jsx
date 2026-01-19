@@ -159,7 +159,7 @@ const HeroCard = () => {
                     <button
                         onClick={handleDownload}
                         className="flex-1 bg-primary-content text-secondary-content flex items-center justify-center gap-2 text-[10px] md:text-xs lg:text-[10px] font-bold uppercase tracking-[2px] hover:text-green-500 transition-all border-r border-white/5 group">
-                        Download CV
+                        Download Resume
                         <FaDownload className="text-xs group-hover:animate-bounce" />
                     </button>
                     <Link to="/contact" className="flex-1 bg-primary-content text-secondary-content flex items-center justify-center gap-2 text-[10px] md:text-xs lg:text-[10px] font-bold uppercase tracking-[2px] hover:text-green-500 transition-all">
