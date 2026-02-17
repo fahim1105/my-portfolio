@@ -36,7 +36,7 @@ export const router = createBrowserRouter([
                 Component: Contact
             },
             {
-                path:"/education",
+                path:"/edu-certificates",
                 Component:Education
             }
         ]

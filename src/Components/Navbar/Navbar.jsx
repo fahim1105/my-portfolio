@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { NavLink } from 'react-router';
 import { motion } from 'framer-motion';
 import { HiMenuAlt3, HiX, HiUser, HiBriefcase, HiAcademicCap } from 'react-icons/hi';
@@ -13,7 +13,7 @@ const Navbar = () => {
     const getIcon = (name) => {
         switch (name.toLowerCase()) {
             case 'about': return <HiUser />;
-            case 'education': return <HiAcademicCap />;
+            case 'edu & certificates': return <HiAcademicCap />;
             case 'projects': return <HiBriefcase />;
             case 'social': return <IoShareSocial />;
             case 'contact': return <MdConnectWithoutContact />;
@@ -23,19 +23,14 @@ const Navbar = () => {
 
     const navLinks = [
         { name: 'About', path: '/' },
-        { name: 'Education', path: '/education' },
         { name: 'Projects', path: '/projects' },
+        { name: 'Edu & Certificates', path: '/edu-certificates' },
         { name: 'Social', path: '/social' },
         { name: 'Contact', path: '/contact' },
     ];
 
     return (
         <div className="md:relative z-50 lg:left-35 sticky flex justify-center ">
-
-            {/* স্থির আউটলাইন বর্ডার */}
-            <div className="hidden md:block absolute -left-4 top-2 -bottom-1 w-23 border-l-2 border-b-2 border-primary/40 rounded-[42px] pointer-events-none">
-            </div>
-
             <div className="lg:[perspective:2000px] w-full lg:w-fit">
                 <motion.nav
                     initial={{ opacity: 0, x: -20 }}
@@ -45,7 +40,7 @@ const Navbar = () => {
                         rotateY: typeof window !== 'undefined' && window.innerWidth >= 1024 ? 15 : 0
                     }}
                     transition={{ duration: 0.5 }}
-                    className="relative w-full lg:w-16 bg-gradient-to-r from-primary-content/90 to-transparent backdrop-blur-lg text-base-content shadow-xl border border-base-300 md:rounded-[30px] lg:rounded-[40px] transition-all duration-300 origin-left lg:px-12 lg:py-12"
+                    className="relative w-full lg:w-16 bg-primary-content text-base-content border border-base-300 md:rounded-[30px] lg:rounded-[40px] transition-all duration-300 origin-left lg:px-12 lg:py-12"
                 >
                     {/* --- Mobile & Tablet Header --- */}
                     <div className="flex lg:hidden items-center justify-between px-6 py-4 md:px-10 md:py-6">
@@ -92,7 +87,7 @@ const Navbar = () => {
                                         <span className="text-xl md:text-2xl lg:text-2xl group-hover:scale-110 transition-transform">
                                             {getIcon(link.name)}
                                         </span>
-                                        <span className="text-[8px] md:text-[10px] font-bold uppercase tracking-tighter">
+                                        <span className="text-[8px] md:text-[10px] font-bold uppercase tracking-tighter text-center">
                                             {link.name}
                                         </span>
                                     </NavLink>

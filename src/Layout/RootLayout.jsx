@@ -38,7 +38,7 @@ const RootLayout = () => {
                                 </div>
 
                                 {/* --- Content Section (Outlet) with Page Transitions --- */}
-                                <div className="lg:col-span-8 bg-base-100 rounded-none md:rounded-4xl shadow-2xl h-full lg:h-[88vh] overflow-y-auto no-scrollbar border-none md:border border-base-300 md:max-w-4xl md:mx-auto lg:mx-0 w-full transition-all duration-300">
+                                <div className="lg:col-span-8 bg-base-100 rounded-none md:rounded-4xl h-full lg:h-[88vh] overflow-y-auto no-scrollbar border-none md:border border-base-300 md:max-w-4xl md:mx-auto lg:mx-0 w-full transition-all duration-300">
                                     <div className="p-6 md:p-10 lg:p-12">
                                         <AnimatePresence mode="wait">
                                             <SmoothPageTransition key={location.pathname}>

@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
 import { HiAcademicCap } from 'react-icons/hi';
+import { FaCertificate } from 'react-icons/fa';
+import certificateImg from '../../assets/IMG_4561.jpeg';
 
 const Education = () => {
     const educationData = [
@@ -23,10 +25,20 @@ const Education = () => {
         }
     ];
 
+    const certificatesData = [
+        {
+            id: 1,
+            title: "Complete Web Development Bootcamp",
+            issuer: "Programming Hero",
+            description: "Comprehensive course covering HTML, CSS, JavaScript, React, Node.js, and MongoDB. Completed with hands-on projects and real-world applications.",
+            image: certificateImg
+        },
+    ];
+
     return (
         <section className="bg-base-100 text-base-content py-10 px-4 md:px-10 lg:py-20 min-h-screen">
             <div className="max-w-4xl mx-auto">
-                {/* Header */}
+                {/* Education Header */}
                 <motion.h2
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -42,7 +54,8 @@ const Education = () => {
                     </motion.div>
                 </motion.h2>
 
-                <div className="relative border-l-2 border-primary/20 ml-4 md:ml-8 space-y-12">
+                {/* Education Timeline */}
+                <div className="relative border-l-2 border-primary/20 ml-4 md:ml-8 space-y-12 mb-20">
                     {educationData.map((edu, index) => (
                         <motion.div
                             key={edu.id}
@@ -130,6 +143,95 @@ const Education = () => {
                                 >
                                     {edu.details}
                                 </motion.p>
+                            </motion.div>
+                        </motion.div>
+                    ))}
+                </div>
+
+                {/* Certificates Section */}
+                <motion.h2
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5 }}
+                    viewport={{ once: true }}
+                    className="text-3xl md:text-4xl font-bold mb-12 flex items-center gap-3 mt-16"
+                >
+                    Certificates
+                    <motion.div
+                        animate={{ rotate: [0, 15, -15, 0] }}
+                        transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+                    >
+                        <FaCertificate className="text-primary" />
+                    </motion.div>
+                </motion.h2>
+
+                {/* Certificates Cards with Timeline */}
+                <div className="relative border-l-2 border-primary/20 ml-4 md:ml-8 space-y-12">
+                    {certificatesData.map((cert, index) => (
+                        <motion.div
+                            key={cert.id}
+                            initial={{ opacity: 0, x: -30 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ delay: index * 0.2, duration: 0.6 }}
+                            viewport={{ once: true, amount: 0.3 }}
+                            className="relative pl-8 md:pl-12"
+                        >
+                            {/* Timeline dot with pulse animation */}
+                            <motion.span
+                                animate={{
+                                    scale: [1, 1.2, 1],
+                                    boxShadow: [
+                                        "0 0 0 0 rgba(16, 185, 129, 0.7)",
+                                        "0 0 0 10px rgba(16, 185, 129, 0)",
+                                        "0 0 0 0 rgba(16, 185, 129, 0)"
+                                    ]
+                                }}
+                                transition={{
+                                    duration: 2,
+                                    repeat: Infinity,
+                                    repeatDelay: 1
+                                }}
+                                className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-primary"
+                            />
+
+                            <motion.div
+                                whileHover={{ scale: 1.02, y: -5 }}
+                                transition={{ duration: 0.3 }}
+                                className="bg-base-200 rounded-[24px] border border-white/5 shadow-xl hover:border-primary/30 transition-all duration-300 overflow-hidden"
+                            >
+                                {/* Card Content */}
+                                <div className="p-6 md:p-8">
+                                    {/* Heading Section */}
+                                    <div className="mb-4">
+                                        <h3 className="text-xl md:text-2xl font-bold text-secondary-content text-center">
+                                            {cert.title}
+                                        </h3>
+                                    </div>
+
+                                    {/* Short Description Section */}
+                                    <div className="mb-6">
+                                        <p className="text-sm text-secondary-content/70 text-center leading-relaxed">
+                                            {cert.description}
+                                        </p>
+                                    </div>
+
+                                    {/* Image Section - Full image visible */}
+                                    <div className="rounded-xl overflow-hidden bg-base-300 flex items-center justify-center p-4">
+                                        <img
+                                            src={cert.image}
+                                            alt={cert.title}
+                                            className="w-full h-auto object-contain"
+                                        />
+                                    </div>
+
+                                    {/* Issuer Badge at bottom */}
+                                    <div className="mt-6 text-center">
+                                        <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary text-xs font-bold">
+                                            <FaCertificate />
+                                            {cert.issuer}
+                                        </span>
+                                    </div>
+                                </div>
                             </motion.div>
                         </motion.div>
                     ))}
