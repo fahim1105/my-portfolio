@@ -3,13 +3,14 @@ import { motion } from 'framer-motion';
 import { FaLinkedinIn, FaGithub, FaDownload, FaPhoneAlt, FaFacebook } from 'react-icons/fa';
 import { GrInstagram } from 'react-icons/gr';
 import { Link } from 'react-router';
-import { saveAs } from 'file-saver';
 import { Typewriter } from 'react-simple-typewriter';
-import myCV from '/asif_cv.pdf';
+
+const API = import.meta.env.VITE_API_URL;
 
 const HeroCard = () => {
     const [isMobile, setIsMobile] = useState(false);
     const [isTablet, setIsTablet] = useState(false);
+    const [cvUrl, setCvUrl] = useState('');
 
     useEffect(() => {
         const checkScreenSize = () => {
@@ -22,9 +23,21 @@ const HeroCard = () => {
         return () => window.removeEventListener('resize', checkScreenSize);
     }, []);
 
+    useEffect(() => {
+        fetch(`${API}/profile`)
+            .then(r => r.json())
+            .then(d => { if (d?.cvUrl) setCvUrl(d.cvUrl); })
+            .catch(() => { });
+    }, []);
+
     const handleDownload = () => {
-        const fileName = "Asif_Al_Fattha_Fahim_CV.pdf";
-        saveAs(myCV, fileName);
+        if (!cvUrl) return;
+        const a = document.createElement('a');
+        a.href = cvUrl;
+        a.download = 'Asif_Al_Fattha_Fahim_CV.pdf';
+        a.target = '_blank';
+        a.rel = 'noreferrer';
+        a.click();
     };
 
     return (
@@ -158,7 +171,8 @@ const HeroCard = () => {
                 <div className="mt-auto flex border-t border-secondary-content/50 h-16 md:h-20 lg:h-16">
                     <button
                         onClick={handleDownload}
-                        className="flex-1 bg-primary-content text-secondary-content flex items-center justify-center gap-2 text-[10px] md:text-xs lg:text-[10px] font-bold uppercase tracking-[2px] hover:text-green-500 transition-all border-r border-white/5 group">
+                        disabled={!cvUrl}
+                        className="flex-1 bg-primary-content text-secondary-content flex items-center justify-center gap-2 text-[10px] md:text-xs lg:text-[10px] font-bold uppercase tracking-[2px] hover:text-green-500 transition-all border-r border-white/5 group disabled:opacity-40 disabled:cursor-not-allowed">
                         Download Resume
                         <FaDownload className="text-xs group-hover:animate-bounce" />
                     </button>

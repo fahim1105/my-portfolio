@@ -4,38 +4,43 @@ import { motion } from 'framer-motion';
 import { HiOutlineMailOpen } from 'react-icons/hi';
 import { useToast } from '../../Context/ToastContext';
 
+const API = import.meta.env.VITE_API_URL;
+
 const Contact = () => {
     const form = useRef();
     const [loading, setLoading] = useState(false);
     const { showSuccess, showError } = useToast();
 
-    const sendEmail = (e) => {
+    const sendEmail = async (e) => {
         e.preventDefault();
         setLoading(true);
 
-        emailjs.sendForm(
-            import.meta.env.VITE_EMAILJS_SERVICE_ID,
-            import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-            form.current,
-            import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-        )
-            .then(() => {
-                setLoading(false);
-                e.target.reset();
-                
-                showSuccess(
-                    "🎉 Message sent successfully! I'll get back to you soon.",
-                    6000
-                );
-            }, (error) => {
-                console.log("Failed...", error);
-                setLoading(false);
-                
-                showError(
-                    "❌ Failed to send message. Please try again or contact me directly.",
-                    7000
-                );
+        const { name, email, title, message } = Object.fromEntries(new FormData(form.current));
+
+        try {
+            // Save to DB
+            await fetch(`${API}/messages`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, title, message }),
             });
+
+            // Send via EmailJS
+            await emailjs.sendForm(
+                import.meta.env.VITE_EMAILJS_SERVICE_ID,
+                import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+                form.current,
+                import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+            );
+
+            e.target.reset();
+            showSuccess("🎉 Message sent successfully! I'll get back to you soon.", 6000);
+        } catch (error) {
+            console.log('Failed...', error);
+            showError('❌ Failed to send message. Please try again or contact me directly.', 7000);
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (

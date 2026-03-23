@@ -1,5 +1,6 @@
 import { Outlet, useLocation } from 'react-router';
 import { AnimatePresence } from 'framer-motion';
+import { useEffect } from 'react';
 import Navbar from '../Components/Navbar/Navbar';
 import HeroCard from '../Components/HeroCard/HeroCard';
 import ScrollProgress from '../Components/ScrollProgress/ScrollProgress';
@@ -7,8 +8,19 @@ import BackToTop from '../Components/BackToTop/BackToTop';
 import SmoothPageTransition from '../Components/SmoothPageTransition/SmoothPageTransition';
 import ParticleBackground from '../Components/ParticleBackground/ParticleBackground';
 
+const API = import.meta.env.VITE_API_URL;
+
 const RootLayout = () => {
     const location = useLocation();
+
+    // Track page visit silently on every route change
+    useEffect(() => {
+        fetch(`${API}/analytics/track`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ page: location.pathname }),
+        }).catch(() => { });
+    }, [location.pathname]);
 
     return (
         <div className="min-h-screen bg-base-200 overflow-x-hidden relative">
