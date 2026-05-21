@@ -128,7 +128,7 @@ const About = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2, duration: 0.6 }}
-                    className="bg-base-200/50 backdrop-blur-xl border border-base-300 rounded-[2.5rem] p-8 lg:p-12 shadow-2xl"
+                    className="bg-base-200/50 border border-base-300 rounded-[2.5rem] p-8 lg:p-12 shadow-2xl"
                 >
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                         <div className="space-y-6">
@@ -194,7 +194,7 @@ const About = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ delay: idx * 0.1, duration: 0.6 }}
                                 viewport={{ once: true }}
-                                className="bg-base-200/50 backdrop-blur-xl border border-base-300 rounded-[2rem] p-6 shadow-xl"
+                                className="bg-base-200/50 border border-base-300 rounded-[2rem] p-6 shadow-xl"
                             >
                                 <div className="flex items-center gap-3 mb-6 pb-3 border-b border-base-300/50">
                                     <div className="text-2xl text-primary">
@@ -227,6 +227,7 @@ const About = () => {
                                                     whileInView="visible"
                                                     custom={skill.percentage}
                                                     viewport={{ once: true }}
+                                                    style={{ willChange: 'width' }}
                                                 />
                                             </div>
                                         </motion.div>

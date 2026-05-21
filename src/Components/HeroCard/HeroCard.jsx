@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaLinkedinIn, FaGithub, FaDownload, FaPhoneAlt, FaFacebook } from 'react-icons/fa';
 import { GrInstagram } from 'react-icons/gr';
@@ -7,28 +7,17 @@ import { Typewriter } from 'react-simple-typewriter';
 
 const API = import.meta.env.VITE_API_URL;
 
-const HeroCard = () => {
-    const [isMobile, setIsMobile] = useState(false);
-    const [isTablet, setIsTablet] = useState(false);
-    const [cvUrl, setCvUrl] = useState('');
+const HeroCard = ({ cvUrl: cvUrlProp }) => {
+    const [cvUrl, setCvUrl] = useState(cvUrlProp || '');
 
+    // Only fetch if parent didn't pass cvUrl down
     useEffect(() => {
-        const checkScreenSize = () => {
-            const width = window.innerWidth;
-            setIsMobile(width < 768);
-            setIsTablet(width >= 768 && width < 1024);
-        };
-        checkScreenSize();
-        window.addEventListener('resize', checkScreenSize);
-        return () => window.removeEventListener('resize', checkScreenSize);
-    }, []);
-
-    useEffect(() => {
+        if (cvUrlProp) return;
         fetch(`${API}/profile`)
             .then(r => r.json())
             .then(d => { if (d?.cvUrl) setCvUrl(d.cvUrl); })
             .catch(() => { });
-    }, []);
+    }, [cvUrlProp]);
 
     const handleDownload = () => {
         if (!cvUrl) return;
@@ -73,7 +62,6 @@ const HeroCard = () => {
                     filter: grayscale(0%);
                 }
 
-                /* Animation duration increased to 3s for a smoother premium feel */
                 .main-img {
                     animation: main-blink 3s infinite;
                 }
@@ -88,13 +76,11 @@ const HeroCard = () => {
                     filter: grayscale(100%) brightness(130%);
                 }
 
-                /* Grayscale effect now lasts longer (from 80% to 95%) */
                 @keyframes main-blink {
                     0%, 75%, 100% { filter: grayscale(0%); opacity: 1; transform: scale(1); }
                     80%, 95% { filter: grayscale(100%); opacity: 0.9; transform: scale(1.01); }
                 }
 
-                /* Slices triggered during the grayscale window */
                 @keyframes glitch-slice-1 {
                     0%, 79%, 96%, 100% { opacity: 0; transform: translateX(0); clip-path: inset(0 0 0 0); }
                     82% { opacity: 1; transform: translateX(-12px); clip-path: inset(15% 0 65% 0); }
@@ -109,20 +95,18 @@ const HeroCard = () => {
                 `}
             </style>
 
+            {/* Use CSS for responsive rotateY instead of JS resize listener */}
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
-                animate={{
-                    opacity: 1,
-                    y: 0,
-                    rotateY: (isMobile || isTablet) ? 0 : 15,
-                }}
+                animate={{ opacity: 1, y: 0 }}
                 whileHover={{ rotateY: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
-                className={`relative bg-[#1e1e1f] text-white rounded-[32px] overflow-hidden shadow-2xl flex flex-col h-full border border-white/5 ${(isMobile || isTablet) ? 'origin-center' : 'origin-right'}`}
+                style={{ willChange: 'transform' }}
+                className="relative bg-[#1e1e1f] text-white rounded-[32px] overflow-hidden shadow-2xl flex flex-col h-full border border-white/5 origin-right lg:[transform:rotateY(15deg)]"
             >
 
                 {/* --- Top Image Section --- */}
-                <div className={`premium-glitch w-full overflow-hidden transition-all duration-500 ${isMobile ? 'h-[420px]' : isTablet ? 'h-[550px]' : 'h-[500px]'}`}>
+                <div className="premium-glitch w-full overflow-hidden transition-all duration-500 h-[420px] md:h-[550px] lg:h-[500px]">
                     
                     {/* Removed Scanline for a cleaner look */}
 
@@ -182,8 +166,7 @@ const HeroCard = () => {
                     </Link>
                 </div>
 
-                {!isMobile && !isTablet && <div className="absolute top-0 left-0 w-[1px] h-full bg-white/5"></div>}
-            </motion.div>
+                <div className="absolute top-0 left-0 w-[1px] h-full bg-white/5 hidden lg:block"></div>            </motion.div>
         </div>
     );
 };

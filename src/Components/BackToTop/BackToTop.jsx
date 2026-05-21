@@ -36,8 +36,9 @@ const BackToTop = () => {
                 damping: 20
             }}
             onClick={scrollToTop}
+            aria-label="Back to top"
             className="fixed bottom-8 right-8 z-50 btn btn-circle btn-lg bg-primary hover:bg-primary/90 border-none text-white shadow-lg"
-            style={{ display: isVisible ? 'flex' : 'none' }}
+            style={{ willChange: 'transform', pointerEvents: isVisible ? 'auto' : 'none' }}
         >
             <motion.div
                 animate={{ y: [0, -2, 0] }}
@@ -46,6 +47,7 @@ const BackToTop = () => {
                     repeat: Infinity, 
                     ease: "easeInOut" 
                 }}
+                style={{ willChange: 'transform' }}
             >
                 <HiArrowUp size={24} />
             </motion.div>

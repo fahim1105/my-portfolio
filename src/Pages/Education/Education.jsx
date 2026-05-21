@@ -6,6 +6,14 @@ import { EducationCardSkeleton, CertificateSkeleton } from '../../Components/Ske
 
 const API = import.meta.env.VITE_API_URL;
 
+// CSS-only ping dot — no JS animation loop, much cheaper
+const PingDot = () => (
+    <span className="absolute -left-[9px] top-0 flex h-4 w-4">
+        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-50"></span>
+        <span className="relative inline-flex rounded-full h-4 w-4 bg-primary"></span>
+    </span>
+);
+
 const Education = () => {
     const [educationData, setEducationData] = useState([]);
     const [certificatesData, setCertificatesData] = useState([]);
@@ -61,14 +69,7 @@ const Education = () => {
                                 viewport={{ once: true, amount: 0.3 }}
                                 className="relative pl-8 md:pl-12"
                             >
-                                <motion.span
-                                    animate={{
-                                        scale: [1, 1.2, 1],
-                                        boxShadow: ["0 0 0 0 rgba(16,185,129,0.7)", "0 0 0 10px rgba(16,185,129,0)", "0 0 0 0 rgba(16,185,129,0)"]
-                                    }}
-                                    transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
-                                    className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-primary"
-                                />
+                                <PingDot />
                                 <motion.div
                                     whileHover={{ scale: 1.02, y: -5 }}
                                     transition={{ duration: 0.3 }}
@@ -139,14 +140,7 @@ const Education = () => {
                             viewport={{ once: true, amount: 0.3 }}
                             className="relative pl-8 md:pl-12"
                         >
-                            <motion.span
-                                animate={{
-                                    scale: [1, 1.2, 1],
-                                    boxShadow: ["0 0 0 0 rgba(16,185,129,0.7)", "0 0 0 10px rgba(16,185,129,0)", "0 0 0 0 rgba(16,185,129,0)"]
-                                }}
-                                transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
-                                className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-primary"
-                            />
+                            <PingDot />
                             <motion.div
                                 whileHover={{ scale: 1.02, y: -5 }}
                                 transition={{ duration: 0.3 }}

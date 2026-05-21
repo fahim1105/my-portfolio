@@ -68,7 +68,7 @@ const Projects = () => {
                             key={project._id}
                             variants={itemVariants}
                             whileHover={{ y: -10 }}
-                            className="group bg-base-200/50 backdrop-blur-xl border border-base-300 rounded-[2.5rem] p-5 shadow-2xl hover:border-primary/30 transition-all duration-200 flex flex-col"
+                            className="group bg-base-200/50 border border-base-300 rounded-[2.5rem] p-5 shadow-2xl hover:border-primary/30 transition-all duration-200 flex flex-col"
                         >
                             {/* Image */}
                             <div className="relative overflow-hidden rounded-[2rem] mb-6 aspect-video">

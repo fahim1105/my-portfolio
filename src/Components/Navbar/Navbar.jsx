@@ -34,13 +34,9 @@ const Navbar = () => {
             <div className="lg:[perspective:2000px] w-full lg:w-fit">
                 <motion.nav
                     initial={{ opacity: 0, x: -20 }}
-                    animate={{
-                        opacity: 1,
-                        x: 0,
-                        rotateY: typeof window !== 'undefined' && window.innerWidth >= 1024 ? 15 : 0
-                    }}
+                    animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="relative w-full lg:w-16 bg-primary-content text-base-content border border-base-300 md:rounded-[30px] lg:rounded-[40px] transition-all duration-300 origin-left lg:px-12 lg:py-12"
+                    className="relative w-full lg:w-16 bg-primary-content text-base-content border border-base-300 md:rounded-[30px] lg:rounded-[40px] transition-all duration-300 origin-left lg:px-12 lg:py-12 lg:[transform:rotateY(15deg)]"
                 >
                     {/* --- Mobile & Tablet Header --- */}
                     <div className="flex lg:hidden items-center justify-between px-6 py-4 md:px-10 md:py-6">

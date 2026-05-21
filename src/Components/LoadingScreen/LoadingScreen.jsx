@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 
 const LoadingScreen = ({ onLoadingComplete }) => {
     const [progress, setProgress] = useState(0);
@@ -15,7 +15,6 @@ const LoadingScreen = ({ onLoadingComplete }) => {
         "SYSTEM_READY_V2.0.4"
     ];
 
-    // Background code snippets for the "hacker/dev" effect
     const codeLines = [
         "import { motion } from 'framer-motion';",
         "const [data, setData] = useState(null);",
@@ -30,6 +29,15 @@ const LoadingScreen = ({ onLoadingComplete }) => {
         "Object.keys(payload).map(key => ...)",
         "console.log('System Operational');"
     ];
+
+    // Stable random values — computed once, not on every render
+    const columns = useMemo(() =>
+        Array.from({ length: 8 }).map((_, i) => ({
+            id: i,
+            duration: 12 + i * 2,
+            delay: -(i * 2.5),
+        })),
+    []);
 
     useEffect(() => {
         const totalDuration = 2500; 
@@ -59,19 +67,18 @@ const LoadingScreen = ({ onLoadingComplete }) => {
         >
             {/* --- Advanced Background Coding Matrix --- */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-[0.15] flex justify-between px-4">
-                {Array.from({ length: 12 }).map((_, i) => (
-                    <div key={i} className="flex flex-col gap-4 text-[9px] md:text-[11px] text-primary font-bold">
+                {columns.map((col) => (
+                    <div key={col.id} className="flex flex-col gap-4 text-[9px] md:text-[11px] text-primary font-bold">
                         <motion.div
                             animate={{ y: ["-100%", "100%"] }}
                             transition={{
-                                duration: Math.random() * 10 + 10,
+                                duration: col.duration,
                                 repeat: Infinity,
                                 ease: "linear",
-                                delay: Math.random() * -20
+                                delay: col.delay,
                             }}
                             className="flex flex-col gap-8"
                         >
-                            {/* repeating the code lines to create a stream */}
                             {[...codeLines, ...codeLines].map((line, idx) => (
                                 <span key={idx} className="whitespace-nowrap opacity-60">
                                     {line}
