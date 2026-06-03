@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import * as FaIcons from 'react-icons/fa';
 import { SocialSkeleton } from '../../Components/Skeleton/Skeleton';
+import PageSeo from '../../Components/PageSeo/PageSeo';
 
 const API = import.meta.env.VITE_API_URL;
 
@@ -35,6 +36,11 @@ const Social = () => {
 
     return (
         <section className="py-10 px-3">
+            <PageSeo
+                slug="social"
+                defaultTitle="Social Links | Asif Al Fattha Fahim"
+                defaultDescription="Connect with me on LinkedIn, GitHub, Instagram, Facebook and more."
+            />
             {/* Header */}
             <motion.div
                 initial={{ opacity: 0, x: -20 }}

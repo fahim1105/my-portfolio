@@ -3,6 +3,7 @@ import emailjs from '@emailjs/browser';
 import { motion } from 'framer-motion';
 import { HiOutlineMailOpen } from 'react-icons/hi';
 import { useToast } from '../../Context/ToastContext';
+import PageSeo from '../../Components/PageSeo/PageSeo';
 
 const API = import.meta.env.VITE_API_URL;
 
@@ -45,6 +46,11 @@ const Contact = () => {
 
     return (
         <section className="bg-base-100 text-base-content py-5 px-0 md:px-10 lg:py-10 md:my-6 flex items-center justify-center">
+            <PageSeo
+                slug="contact"
+                defaultTitle="Contact | Asif Al Fattha Fahim"
+                defaultDescription="Get in touch with me for project inquiries, collaborations or job opportunities."
+            />
             <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}

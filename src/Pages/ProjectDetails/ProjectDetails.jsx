@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router';
 import { FiGithub, FiExternalLink, FiArrowLeft, FiLayers, FiAlertCircle, FiCheckCircle, FiClock } from 'react-icons/fi';
 import { AiFillRocket } from 'react-icons/ai';
+import PageSeo from '../../Components/PageSeo/PageSeo';
 
 const API = import.meta.env.VITE_API_URL;
 
@@ -33,6 +34,13 @@ const ProjectDetails = () => {
 
     return (
         <section className="min-h-screen bg-base-100 py-8">
+            {/* Dynamic SEO — uses project's own title, description and image */}
+            <PageSeo
+                slug="project-details"
+                defaultTitle={`${project.title} | Asif Al Fattha Fahim`}
+                defaultDescription={project.description}
+                defaultOgImage={project.imageURL}
+            />
             <div className="max-w-6xl mx-auto">
                 <Link to="/projects" className="btn btn-ghost mb-8 group hover:bg-primary/10">
                     <FiArrowLeft className="group-hover:-translate-x-1 transition-transform mr-2" />

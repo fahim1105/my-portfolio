@@ -1,6 +1,7 @@
 import { StrictMode, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import { AnimatePresence } from 'framer-motion'
+import { HelmetProvider } from 'react-helmet-async'
 import './index.css'
 import { RouterProvider } from "react-router/dom";
 import { router } from './Routes/Router.jsx';
@@ -11,15 +12,17 @@ const App = () => {
   const [loading, setLoading] = useState(true);
 
   return (
-    <ToastProvider>
-      <AnimatePresence mode="wait">
-        {loading ? (
-          <LoadingScreen key="loader" onLoadingComplete={() => setLoading(false)} />
-        ) : (
-          <RouterProvider key="app" router={router} />
-        )}
-      </AnimatePresence>
-    </ToastProvider>
+    <HelmetProvider>
+      <ToastProvider>
+        <AnimatePresence mode="wait">
+          {loading ? (
+            <LoadingScreen key="loader" onLoadingComplete={() => setLoading(false)} />
+          ) : (
+            <RouterProvider key="app" router={router} />
+          )}
+        </AnimatePresence>
+      </ToastProvider>
+    </HelmetProvider>
   );
 };
 

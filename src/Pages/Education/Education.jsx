@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { HiAcademicCap } from 'react-icons/hi';
 import { FaCertificate } from 'react-icons/fa';
 import { EducationCardSkeleton, CertificateSkeleton } from '../../Components/Skeleton/Skeleton';
+import PageSeo from '../../Components/PageSeo/PageSeo';
 
 const API = import.meta.env.VITE_API_URL;
 
@@ -34,6 +35,11 @@ const Education = () => {
 
     return (
         <section className="bg-base-100 text-base-content py-10 px-4 md:px-10 lg:py-20 min-h-screen">
+            <PageSeo
+                slug="education"
+                defaultTitle="Education & Certificates | Asif Al Fattha Fahim"
+                defaultDescription="My academic background and professional certificates in web development and programming."
+            />
             <div className="max-w-4xl mx-auto">
                 {/* Header */}
                 <motion.h2

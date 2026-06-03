@@ -6,6 +6,7 @@ import {
     MdCode, MdDesignServices, MdStorage
 } from 'react-icons/md';
 import { AboutSkeleton } from '../../Components/Skeleton/Skeleton';
+import PageSeo from '../../Components/PageSeo/PageSeo';
 
 const API = import.meta.env.VITE_API_URL;
 
@@ -110,6 +111,11 @@ const About = () => {
             animate={{ opacity: 1 }}
             className="min-h-screen bg-base-100 py-10 space-y-20"
         >
+            <PageSeo
+                slug="home"
+                defaultTitle="Asif Al Fattha Fahim | MERN Stack Developer"
+                defaultDescription="Junior Web Developer specializing in React, Node.js and MongoDB. Building scalable full-stack web applications."
+            />
             {/* ABOUT ME */}
             <div id="about-me">
                 <motion.div

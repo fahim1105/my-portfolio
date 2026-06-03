@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router';
 import { FiGithub, FiExternalLink, FiEye } from 'react-icons/fi';
 import { ProjectCardSkeleton } from '../../Components/Skeleton/Skeleton';
+import PageSeo from '../../Components/PageSeo/PageSeo';
 
 const API = import.meta.env.VITE_API_URL;
 
@@ -42,6 +43,11 @@ const Projects = () => {
 
     return (
         <section id="projects" className="min-h-screen bg-base-100 pt-10">
+            <PageSeo
+                slug="projects"
+                defaultTitle="Projects | Asif Al Fattha Fahim"
+                defaultDescription="Explore my web development projects built with React, Node.js, MongoDB and more."
+            />
             <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
