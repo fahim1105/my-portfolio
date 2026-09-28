@@ -32,6 +32,7 @@ const emptyForm = {
     challenges: '', futurePlans: '',
     features: '',
     durationFrom: '', durationTo: '',
+    customTech: '',         // custom tech input
 };
 
 // Toggle a tech tag in/out of the array
@@ -152,6 +153,7 @@ const AdminProjects = () => {
             challenges: p.challenges || '',
             futurePlans: p.futurePlans || '',
             features: (p.features || []).join(', '),
+            customTech: '',
             ...parseDuration(p.duration || ''),
         });
         setEditId(p._id); setError(''); setShowModal(true);
@@ -307,6 +309,42 @@ const AdminProjects = () => {
                                         ))}
                                     </div>
                                 )}
+
+                                {/* Custom tech input */}
+                                <div className="flex gap-2 mt-3">
+                                    <input
+                                        type="text"
+                                        value={form.customTech}
+                                        onChange={e => setForm(f => ({ ...f, customTech: e.target.value }))}
+                                        onKeyDown={e => {
+                                            if (e.key === 'Enter') {
+                                                e.preventDefault();
+                                                const val = form.customTech.trim();
+                                                if (val && !form.techStack.includes(val)) {
+                                                    setForm(f => ({ ...f, techStack: [...f.techStack, val], customTech: '' }));
+                                                } else {
+                                                    setForm(f => ({ ...f, customTech: '' }));
+                                                }
+                                            }
+                                        }}
+                                        placeholder="Add custom tech..."
+                                        className="flex-1 bg-gray-800 border border-white/10 rounded-xl px-3 py-2 text-white text-xs focus:outline-none focus:border-emerald-500/50 transition-all placeholder-gray-600"
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            const val = form.customTech.trim();
+                                            if (val && !form.techStack.includes(val)) {
+                                                setForm(f => ({ ...f, techStack: [...f.techStack, val], customTech: '' }));
+                                            } else {
+                                                setForm(f => ({ ...f, customTech: '' }));
+                                            }
+                                        }}
+                                        className="px-3 py-2 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 border border-emerald-500/30 rounded-xl text-xs font-semibold transition-all"
+                                    >
+                                        + Add
+                                    </button>
+                                </div>
                             </div>
 
                             {/* Duration — date range */}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import {
     MdWork, MdSchool, MdShare, MdArrowForward, MdWorkspacePremium,
     MdVisibility, MdOutlineToday, MdBarChart
@@ -70,8 +70,15 @@ const Dashboard = () => {
     const [analytics, setAnalytics] = useState(null);
     const [analyticsLoading, setAnalyticsLoading] = useState(true);
 
+    const navigate = useNavigate();
     const token = localStorage.getItem('admin_token');
     const headers = { Authorization: `Bearer ${token}` };
+
+    // Auto-logout if token is expired/invalid
+    const handleUnauth = () => {
+        localStorage.removeItem('admin_token');
+        navigate('/admin/login', { replace: true });
+    };
 
     useEffect(() => {
         Promise.all([
@@ -89,8 +96,13 @@ const Dashboard = () => {
         }).catch(() => { });
 
         fetch(`${API}/analytics/stats`, { headers })
-            .then(r => r.json())
-            .then(data => setAnalytics(data))
+            .then(r => {
+                if (r.status === 401 || r.status === 403) { handleUnauth(); return null; }
+                return r.ok ? r.json() : Promise.reject(r.status);
+            })
+            .then(data => {
+                if (data && typeof data.total === 'number') setAnalytics(data);
+            })
             .catch(() => { })
             .finally(() => setAnalyticsLoading(false));
     }, []);
@@ -144,7 +156,7 @@ const Dashboard = () => {
                             </div>
                             <div>
                                 <p className="text-gray-400 text-sm">Total Views</p>
-                                <p className="text-3xl font-bold text-white">{analytics.total.toLocaleString()}</p>
+                                <p className="text-3xl font-bold text-white">{(analytics.total ?? 0).toLocaleString()}</p>
                             </div>
                         </div>
                         <div className="bg-gray-900/60 border border-white/10 rounded-2xl p-6 flex items-center gap-4">
@@ -153,7 +165,7 @@ const Dashboard = () => {
                             </div>
                             <div>
                                 <p className="text-gray-400 text-sm">Today</p>
-                                <p className="text-3xl font-bold text-white">{analytics.todayCount.toLocaleString()}</p>
+                                <p className="text-3xl font-bold text-white">{(analytics.todayCount ?? 0).toLocaleString()}</p>
                             </div>
                         </div>
                         <div className="bg-gray-900/60 border border-white/10 rounded-2xl p-6 flex items-center gap-4">
@@ -163,7 +175,7 @@ const Dashboard = () => {
                             <div>
                                 <p className="text-gray-400 text-sm">This Week</p>
                                 <p className="text-3xl font-bold text-white">
-                                    {analytics.daily.reduce((s, d) => s + d.views, 0).toLocaleString()}
+                                    {(analytics.daily ?? []).reduce((s, d) => s + d.views, 0).toLocaleString()}
                                 </p>
                             </div>
                         </div>

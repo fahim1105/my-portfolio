@@ -23,13 +23,22 @@ const AdminLayout = () => {
 
     const token = localStorage.getItem('admin_token');
 
+    // Auto-logout on expired/invalid token
+    const handleUnauth = () => {
+        localStorage.removeItem('admin_token');
+        navigate('/admin/login', { replace: true });
+    };
+
     useEffect(() => {
         fetch(`${import.meta.env.VITE_API_URL}/messages`, {
             headers: { Authorization: `Bearer ${token}` }
         })
-            .then(r => r.json())
+            .then(r => {
+                if (r.status === 401 || r.status === 403) { handleUnauth(); return null; }
+                return r.json();
+            })
             .then(data => {
-                if (Array.isArray(data)) setUnreadCount(data.filter(m => !m.read).length);
+                if (data && Array.isArray(data)) setUnreadCount(data.filter(m => !m.read).length);
             })
             .catch(() => { });
     }, []);
