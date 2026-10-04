@@ -15,12 +15,19 @@ const IMGBB_KEY = import.meta.env.VITE_IMGBB_API_KEY;
 const emptyForm = { title: '', issuer: '', description: '', imageURL: '' };
 
 const SortableCard = ({ c, onEdit, onDelete }) => {
-    const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: c._id });
+    const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+        id: c._id,
+        transition: {
+            duration: 200,
+            easing: 'cubic-bezier(0.25, 1, 0.5, 1)',
+        },
+    });
     const style = {
-        transform: CSS.Transform.toString(transform),
+        transform: CSS.Translate.toString(transform),
         transition,
-        opacity: isDragging ? 0.5 : 1,
+        opacity: isDragging ? 0.4 : 1,
         zIndex: isDragging ? 50 : 'auto',
+        willChange: 'transform',
     };
 
     return (
@@ -84,8 +91,8 @@ const AdminCertificates = () => {
     const authHeaders = { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' };
 
     const sensors = useSensors(
-        useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
-        useSensor(TouchSensor, { activationConstraint: { delay: 200, tolerance: 5 } })
+        useSensor(PointerSensor, { activationConstraint: { distance: 3 } }),
+        useSensor(TouchSensor, { activationConstraint: { delay: 150, tolerance: 5 } })
     );
 
     const fetchCerts = async () => {

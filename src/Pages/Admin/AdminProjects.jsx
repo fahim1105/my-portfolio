@@ -43,12 +43,19 @@ const toggleTech = (tech, current) =>
 
 // Sortable project card
 const SortableCard = ({ p, onEdit, onDelete }) => {
-    const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: p._id });
+    const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+        id: p._id,
+        transition: {
+            duration: 200,
+            easing: 'cubic-bezier(0.25, 1, 0.5, 1)',
+        },
+    });
     const style = {
-        transform: CSS.Transform.toString(transform),
+        transform: CSS.Translate.toString(transform),
         transition,
-        opacity: isDragging ? 0.5 : 1,
+        opacity: isDragging ? 0.4 : 1,
         zIndex: isDragging ? 50 : 'auto',
+        willChange: 'transform',
     };
 
     return (
